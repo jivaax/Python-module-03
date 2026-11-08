@@ -9,11 +9,17 @@ if __name__ == "__main__":
             print(f"Error - invalid parameter '{arg}'")
             continue
         item, quantity = parts
+        if not item:
+            print(f"Error - missing item name in '{arg}'")
+            continue
         if item in inventory:
             print(f"Redundant item '{item}' - discarding")
             continue
         try:
             quantity_int = int(quantity)
+            if quantity_int < 0:
+                print(f"Error - negative quantity for '{item}'")
+                continue
         except ValueError as e:
             print(f"Quantity error for '{item}': {e}")
             continue
